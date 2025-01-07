@@ -1,18 +1,31 @@
 import { Color } from './Color';
 import { Image } from './Image';
+import * as fs from 'fs';
 
 class ImageEditor {
 
-    public static main(args: String[]): void {
-
+    public static main(): void {
+        const args = process.argv.slice(2);
+        new ImageEditor().run(args);
     }
 
     constructor() {
         return;
     }
 
-    public run(args: String[]): void {
+    public run(args: string[]): void {
+        try {
+            if (args.length < 3) {
+                this.usage();
+                return;
+            }
 
+            const [inputFile, outputFile, filter] = args;
+
+            const image = this.read(inputFile);
+        } catch(error) {
+            console.error("Error:", error);
+        }
     }
 
     private usage(): void {
@@ -35,11 +48,18 @@ class ImageEditor {
 
     } 
 
-    private read(filePath: String): Image {
+    private read(filePath: string): Image {
+        let image = new Image(1,1);
 
+        const fileContents = fs.readFileSync(filePath, 'utf-8');
+        console.log(fileContents);
+
+        return image;
     }
 
-    private write(image: Image, filePath: String): void {
-        
+    private write(image: Image, filePath: string): void {
+
     }
 }
+
+ImageEditor.main();
