@@ -52,7 +52,14 @@ class ImageEditor {
         let image = new Image(1,1);
 
         const fileContents = fs.readFileSync(filePath, 'utf-8');
-        console.log(fileContents);
+        const lineContents = fileContents.split(/\s|\n/).filter(line => line.trim() && !line.startsWith('#'));
+
+        // console.log(fileContents);
+        // console.log(lineContents);
+        // console.log(lineContents[1]);
+        // console.log(lineContents[2]);
+
+        
 
         return image;
     }

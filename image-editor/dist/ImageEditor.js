@@ -70,7 +70,11 @@ class ImageEditor {
     read(filePath) {
         let image = new Image_1.Image(1, 1);
         const fileContents = fs.readFileSync(filePath, 'utf-8');
+        const lineContents = fileContents.split(/\s|\n/).filter(line => line.trim() && !line.startsWith('#'));
         console.log(fileContents);
+        console.log(lineContents);
+        console.log(lineContents[1]);
+        console.log(lineContents[2]);
         return image;
     }
     write(image, filePath) {
