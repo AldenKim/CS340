@@ -106,6 +106,14 @@ class ImageEditor {
     motionblur(image, length) {
     }
     invert(image) {
+        for (let x = 0; x < image.getWidth(); ++x) {
+            for (let y = 0; y < image.getHeight(); ++y) {
+                let currColor = image.get(x, y);
+                currColor.red = Math.floor(255 - currColor.red);
+                currColor.green = Math.floor(255 - currColor.green);
+                currColor.blue = Math.floor(255 - currColor.blue);
+            }
+        }
     }
     grayscale(image) {
         for (let x = 0; x < image.getWidth(); ++x) {

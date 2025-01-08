@@ -15,7 +15,7 @@
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ],
-            "args": [ "source_images/one-does-not-simply.ppm", "key_images/grayscale-one-does-not-simply.ppm", "grayscale" ]
+            "args": [ "source_images/one-does-not-simply.ppm", "key_images/my-invert-one-does-not-simply.ppm", "invert" ]
         }
     ]
 }
