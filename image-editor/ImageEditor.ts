@@ -85,7 +85,18 @@ class ImageEditor {
     }
 
     private grayscale(image: Image): void {
+        for (let x = 0; x < image.getWidth(); ++x) {
+            for (let y = 0; y < image.getHeight(); ++y) {
+                let currColor = image.get(x, y); 
 
+                let grayLevel = Math.floor((currColor.red + currColor.green + currColor.blue) / 3);
+                grayLevel = Math.max(0, Math.min(grayLevel, 255));
+
+                currColor.red = grayLevel;
+                currColor.green = grayLevel;
+                currColor.blue = grayLevel;
+            }
+        }
     }
 
     private emboss(image: Image): void {

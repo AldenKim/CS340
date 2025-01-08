@@ -15,7 +15,7 @@
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ],
-            "args": [ "source_images/feep.ppm", "key_images/one-does-not-simply.ppm", "emboss" ]
+            "args": [ "source_images/feep.ppm", "key_images/grayscale-feep.ppm", "grayscale" ]
         }
     ]
 }
