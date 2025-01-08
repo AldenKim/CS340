@@ -22,7 +22,51 @@ class ImageEditor {
 
             const [inputFile, outputFile, filter] = args;
 
-            const image = this.read(inputFile);
+            let image = this.read(inputFile);
+
+            if (filter === "grayscale" || filter === ("greyscale")) {
+                if(args.length !== 3) {
+                    this.usage();
+                    return;
+                }
+                this.grayscale(image);
+            } else if (filter === "invert") {
+                if(args.length !== 3) {
+                    this.usage();
+                    return;
+                }
+                this.invert(image);
+            } else if (filter === "emboss") {
+                if(args.length !== 3) {
+                    this.usage();
+                    return;
+                }
+                this.emboss(image);
+            } else if (filter === "motionblur") {
+                if (args.length !== 4) {
+                    this.usage();
+                    return;
+                }
+
+                let length = -1;
+
+                try {
+                    length = Number(args[3]);
+                } catch(error) {
+                    //ignore
+                }
+                
+                if (length < 0) {
+                    this.usage();
+                    return;
+                }
+
+                this.motionblur(image, length);
+            } else {
+                this.usage();
+            }
+
+            this.write(image, outputFile);
         } catch(error) {
             console.error("Error:", error);
         }
@@ -83,7 +127,32 @@ class ImageEditor {
     }
 
     private write(image: Image, filePath: string): void {
+        const openFD = fs.openSync(filePath, 'w');
 
+        try {
+            fs.writeSync(openFD, "P3\n");
+            let header = image.getWidth().toString() + " " + image.getHeight().toString() + "\n";
+            fs.writeSync(openFD, header);
+            fs.writeSync(openFD, "255\n");
+
+            for (let y = 0; y < image.getHeight(); ++y) {
+                let row = "";
+                for (let x = 0; x < image.getWidth(); ++x) {
+                    const color = image.get(x,y);
+            
+                    if (x !== 0) {
+                        row += " ";
+                    }
+                    row += color.red.toString() + " ";
+                    row += color.green.toString() + " ";
+                    row += color.blue.toString();
+                }
+
+                fs.writeSync(openFD, row + "\n");
+            }
+        } finally {
+            fs.closeSync(openFD);
+        }
     }
 }
 
