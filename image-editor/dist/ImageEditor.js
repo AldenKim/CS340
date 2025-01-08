@@ -128,6 +128,29 @@ class ImageEditor {
         }
     }
     emboss(image) {
+        for (let x = image.getWidth() - 1; x >= 0; --x) {
+            for (let y = image.getHeight() - 1; y >= 0; --y) {
+                let currColor = image.get(x, y);
+                let diff = 0;
+                if (x > 0 && y > 0) {
+                    let upLeftColor = image.get(x - 1, y - 1);
+                    if (Math.floor(Math.abs(currColor.red - upLeftColor.red)) > Math.floor(Math.abs(diff))) {
+                        diff = currColor.red - upLeftColor.red;
+                    }
+                    if (Math.floor(Math.abs(currColor.green - upLeftColor.green)) > Math.floor(Math.abs(diff))) {
+                        diff = currColor.green - upLeftColor.green;
+                    }
+                    if (Math.floor(Math.abs(currColor.blue - upLeftColor.blue)) > Math.floor(Math.abs(diff))) {
+                        diff = currColor.blue - upLeftColor.blue;
+                    }
+                }
+                let grayLevel = Math.floor(128 + diff);
+                grayLevel = Math.max(0, Math.min(grayLevel, 255));
+                currColor.red = grayLevel;
+                currColor.green = grayLevel;
+                currColor.blue = grayLevel;
+            }
+        }
     }
     read(filePath) {
         let image = null;

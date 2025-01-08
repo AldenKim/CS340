@@ -15,7 +15,7 @@
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ],
-            "args": [ "source_images/one-does-not-simply.ppm", "key_images/my-invert-one-does-not-simply.ppm", "invert" ]
+            "args": [ "source_images/one-does-not-simply.ppm", "key_images/my-emboss-one-does-not-simply.ppm", "emboss" ]
         }
     ]
 }
