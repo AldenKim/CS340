@@ -77,7 +77,29 @@ class ImageEditor {
     }
 
     private motionblur(image: Image, length: number): void {
+        if (length < 1) {
+            return;
+        }
 
+        for (let x = 0; x < image.getWidth(); ++x) {
+            for (let y = 0; y < image.getHeight(); ++y) {
+                let currColor = image.get(x, y);
+
+                let maxX = Math.min(image.getWidth() - 1, x + length - 1);
+
+                for (let i = x + 1; i <= maxX; ++i) {
+                    let tempColor = image.get(i, y);
+                    currColor.red += tempColor.red;
+                    currColor.green += tempColor.green;
+                    currColor.blue += tempColor.blue;
+                }
+
+                let delta = (maxX - x + 1);
+                currColor.red = Math.floor(currColor.red / delta);
+                currColor.green = Math.floor(currColor.green / delta);
+                currColor.blue = Math.floor(currColor.blue / delta);
+            }
+        }
     }
 
     private invert(image: Image): void {

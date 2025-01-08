@@ -15,7 +15,7 @@
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ],
-            "args": [ "source_images/one-does-not-simply.ppm", "key_images/my-emboss-one-does-not-simply.ppm", "emboss" ]
+            "args": [ "source_images/one-does-not-simply.ppm", "key_images/my-motionblur-one-does-not-simply.ppm", "motionblur", "10" ]
         }
     ]
 }
