@@ -15,7 +15,7 @@
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ],
-            "args": [ "source_images/one-does-not-simply.ppm", "key_images/my-motionblur-one-does-not-simply.ppm", "motionblur", "10" ]
+            "args": [ "source_images/Penguins.ppm", "key_images/my-penguins-motionblur.ppm", "motionblur", "10" ]
         }
     ]
 }
