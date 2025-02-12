@@ -33,29 +33,18 @@ class LineCount extends BaseClass {
     super(dirName, filePattern, recurse);
   }
 
-  protected async fileProcess(filePath: string) {
-    if (this.fileRegExp.test(filePath)) {
-      let currentLineCount = 0;
-
-      try {
-        const fileContent: string = await fs.promises.readFile(
-          filePath,
-          "utf-8"
-        );
-
-        const lines: string[] = fileContent.split(/\r?\n/);
-        currentLineCount = lines.length;
-        this.totalLineCount += currentLineCount;
-      } catch (error) {
-        console.log(`File ${filePath} is unreadable`);
-      } finally {
-        console.log(`${currentLineCount} ${filePath}`);
-      }
-    }
-  }
-
   protected printMessage(): void {
     console.log(`TOTAL LINES: ${this.totalLineCount}`);
+  }
+
+  protected printResult(currentLineCount: number, filePath: string): void {
+    console.log(`${currentLineCount} ${filePath}`);
+  }
+
+  protected countProcess(currentLineCount: number,  lines: string[]): number {
+      currentLineCount = lines.length;
+      this.totalLineCount += currentLineCount;
+      return currentLineCount;
   }
 }
 

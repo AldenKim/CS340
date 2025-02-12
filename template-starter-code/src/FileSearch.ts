@@ -46,45 +46,29 @@ class FileSearch extends BaseClass {
     this.searchRegExp = new RegExp(searchPattern);
   }
 
-  protected async fileProcess(filePath: string) {
-    let currentMatchCount = 0;
-
-    if (this.fileRegExp.test(filePath)) {
-      try {
-        const fileContent: string = await fs.promises.readFile(
-          filePath,
-          "utf-8"
-        );
-        const lines: string[] = fileContent.split(/\r?\n/);
-
-        lines.forEach((line) => {
-          if (this.searchRegExp.test(line)) {
-            if (++currentMatchCount == 1) {
-              console.log();
-              console.log(`FILE: ${filePath}`);
-            }
-
-            console.log(line);
-            this.totalMatches++;
-          }
-        });
-      } catch (error) {
-        this.unreadableFile(filePath);
-      } finally {
-        if (currentMatchCount > 0) {
-          console.log(`MATCHES: ${currentMatchCount}`);
-        }
-      }
-    }
-  }
-
-  private unreadableFile(fileName: string): void {
-    console.log(`File ${fileName} is unreadable`);
-  }
-
   protected printMessage(): void {
     console.log();
     console.log(`TOTAL MATCHES: ${this.totalMatches}`);
+  }
+
+  protected printResult(currCount: number): void {
+    console.log(`MATCHES: ${currCount}`);
+  }
+
+  protected countProcess(currCount: number, lines: string[], filePath: string): number {
+    lines.forEach((line) => {
+      if (this.searchRegExp.test(line)) {
+        if (++currCount == 1) {
+          console.log();
+          console.log(`FILE: ${filePath}`);
+        }
+
+        console.log(line);
+        this.totalMatches++;
+      }
+    });
+
+    return currCount;
   }
 }
 

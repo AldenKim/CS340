@@ -45,7 +45,28 @@ export abstract class BaseClass {
     }
   }
 
-  protected abstract fileProcess(filePath: string): Promise<void>;
+  protected async fileProcess(filePath: string) {
+    if (this.fileRegExp.test(filePath)) {
+      let currentLineCount = 0;
+
+      try {
+        const fileContent: string = await fs.promises.readFile(
+          filePath,
+          "utf-8"
+        );
+
+        const lines: string[] = fileContent.split(/\r?\n/);
+        currentLineCount = this.countProcess(currentLineCount, lines, filePath);
+      } catch (error) {
+        console.log(`File ${filePath} is unreadable`);
+      } finally {
+        this.printResult(currentLineCount, filePath);
+      }
+    }
+  }
+
+  protected abstract countProcess(currCount: number,  lines: string[], filePath?: string): number;
+  protected abstract printResult(currCount: number, filePath?: string): void;
   protected abstract printMessage(): void;
 
   private isDirectory(path: string): boolean {
