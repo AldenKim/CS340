@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node src/entity/dresser.js"
+    "start": "node src/main.js"
   },
   "keywords": [],
   "author": "",

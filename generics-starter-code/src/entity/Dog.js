@@ -8,16 +8,8 @@ class Dog extends Animal_1.Animal {
         this.chasesCats = chasesCats;
         this.jumpsOnPeople = jumpsOnPeople;
     }
-    static getDogsSorted(dogList) {
-        return dogList.sort((dog1, dog2) => dog1.trainingPriority < dog2.trainingPriority ? -1 : 1);
-    }
-    static getDogsPriorityList(dogList) {
-        return dogList
-            .map((dog) => dog.name + "'s training priority: " + dog.trainingPriority + "\n")
-            .join("");
-    }
     static getDogsSummary(dogListNotSorted) {
-        let dogList = Dog.getDogsSorted(dogListNotSorted);
+        let dogList = Dog.getSorted(dogListNotSorted);
         let easiestDog = dogList[0];
         let mostDifficultDog = dogList[dogList.length - 1];
         let easiestDogString = easiestDog.name +
@@ -36,7 +28,7 @@ class Dog extends Animal_1.Animal {
             (easiestDog.jumpsOnPeople
                 ? " It jumps at people and sometimes bites."
                 : " It does not jump on people but is mean in more subtle ways.");
-        let dogTrainingPriorities = this.getDogsPriorityList(dogList);
+        let dogTrainingPriorities = this.getPriorityList(dogList);
         return (dogTrainingPriorities +
             "\n" +
             easiestDogString +
