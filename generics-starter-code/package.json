@@ -1,0 +1,20 @@
+{
+  "name": "generics-starter-code",
+  "version": "1.0.0",
+  "description": "This code takes a list of animals, either dogs or cats, and outputs some data on them. See results.md for what the output should look like.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node src/entity/dresser.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "@types/node": "^22.13.4"
+  }
+}
