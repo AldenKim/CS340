@@ -1,5 +1,8 @@
 import { Cat } from "./entity/Cat";
 import { Dog } from "./entity/Dog";
+import { functionality } from "./entity/dresser";
+
+functionality();
 
 console.log();
 let catList = [

@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Cat_1 = require("./entity/Cat");
 const Dog_1 = require("./entity/Dog");
+const dresser_1 = require("./entity/dresser");
+(0, dresser_1.functionality)();
 console.log();
 let catList = [
     new Cat_1.Cat("Calvin", 10, true, false),

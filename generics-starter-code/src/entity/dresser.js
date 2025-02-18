@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.functionality = functionality;
 class Drawer {
     constructor() {
         this.items = [];
@@ -41,5 +43,5 @@ function functionality() {
     testDresser.top.addItem({ style: "long", color: "blue" });
     console.log("Testing removeAll: " + testDresser.top.removeAll().length);
     console.log("Testing isEmpty(): " + testDresser.top.isEmpty());
+    console.log("\n");
 }
-functionality();

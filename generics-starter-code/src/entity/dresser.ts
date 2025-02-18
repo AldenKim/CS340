@@ -26,7 +26,7 @@ class Dresser <T, M, B> {
     public bottom: Drawer<B> = new Drawer<B>();
 }
 
-function functionality() {
+export function functionality() {
     type Socks = { style: string; color: string; }
     type Shirt = { style: string; size: string; }
     type Pants = { waist: number; length: number; }
@@ -52,6 +52,5 @@ function functionality() {
     console.log("Testing removeAll: " + testDresser.top.removeAll().length);
 
     console.log("Testing isEmpty(): " + testDresser.top.isEmpty());
+    console.log("\n");
 }
-
-functionality();
