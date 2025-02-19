@@ -1,8 +1,14 @@
 
 // This program violates the principles of High-Quality Abstraction, Primitive Obsession, and Information Hiding.
-// 
 // 1. Explain why/how this program violates the above principles.
+/* First, it violates High-quality abstraction because it doesn't abstract items such as the Board,
+player, etc. It violates primitive obession because it represents the board and players using primitive types
+instead of with classes. It violates Information hiding because the board is public and open to being manipulated 
+by other parts of the code. */
 // 2. Explain how you would refactor the code to improve its design.
+/* I would improve this code by first, making a board class, and then making a separate player class
+to take care of the violations with High-Quality abstraction and Primitive Obsession. I would also make sure to make the board
+private and hide how the board is implement to other parts of the code. */
 
 export class Game {
 

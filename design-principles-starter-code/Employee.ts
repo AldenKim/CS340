@@ -1,5 +1,5 @@
-
 // 1. Explain how this program violates the High-Quality Abstraction principle.
+
 // 2. Explain how you would refactor the code to improve its design.
 
 class Employee {

@@ -1,5 +1,8 @@
 
 // 1. What is the biggest design principle violation in the code below.
+/*Answer 1: I think the biggest design principle violation is the single responsibility principle.
+The code below gets the interval, duration, and departure variables in a single function. We can separate these
+into different functions. */
 // 2. Refactor the code to improve its design.
 
 type Dictionary = {
@@ -12,46 +15,40 @@ type Times = {
 	departure: number;
 };
 
+function checkString(valueString: string, key: string) {
+	if (!valueString) {
+		throw new Error(`missing ${key}`);
+	}
+}
+
+function checkValue(value: number, valueString: string) {
+	if (value <= 0) {
+		throw new Error(`${valueString} must be > 0`);
+	}
+}
+
+function checkWithInterval(value: number, valueString: string, interval: number) {
+	if ((value % interval) != 0) {
+		throw new Error(`${valueString} % interval != 0`);
+	}
+}
+
+function getValidatedValue(valueString: string, key: string, interval?: number) {
+	checkString(valueString, key);
+	let value = parseInt(valueString);
+	checkValue(value, key);
+	if (interval !== undefined) {
+		checkWithInterval(value, key, interval);
+	}
+	return value;
+}
+
 function getTimes(props: Dictionary): Times {
+	let interval = getValidatedValue(props["interval"], "interval");
 
-	let valueString: string;
-	let value: number;
+	let duration = getValidatedValue(props["duration"], "duration", interval);
 
-	valueString = props["interval"];
-	if (!valueString) {
-		throw new Error("missing interval");
-	}
-	value = parseInt(valueString);
-	if (value <= 0) {
-		throw new Error("interval must be > 0");
-	}
-	let interval = value;
-
-	valueString = props["duration"];
-	if (!valueString) {
-		throw new Error("missing duration");
-	}
-	value = parseInt(valueString);
-	if (value <= 0) {
-		throw new Error("duration must be > 0");
-	}
-	if ((value % interval) != 0) {
-		throw new Error("duration % interval != 0");
-	}
-	let duration = value;
-
-	valueString = props["departure"];
-	if (!valueString) {
-		throw new Error("missing departure");
-	}
-	value = parseInt(valueString);
-	if (value <= 0) {
-		throw new Error("departure must be > 0");
-	}
-	if ((value % interval) != 0) {
-		throw new Error("departure % interval != 0");
-	}
-	let departure = value;
+	let departure = getValidatedValue(props["departure"],"departure", interval);
 
 	return { interval, duration, departure };
 }

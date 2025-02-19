@@ -1,6 +1,10 @@
 
 // 1. Explain why/how this program violates the Single Responsibility Principle
+/* Answer 1: This violates the Single Responsibility Principle because the CsvWriter handles both formatting 
+and printing the CSV data  */
 // 2. Explain how you would refactor the program to improve its design.
+/*Answer 2: I would refactor the program by creating two separate classes, one for formatting the output, 
+and one for actually sending it out/writing to the output. */
 
 export class CsvWriter {
 
