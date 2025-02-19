@@ -1,5 +1,7 @@
 // 1. What design principles does this code violate?
+
 /* Answer 1: Violates single responsibility, simplicity, decomposition */
+
 // 2. Refactor the code to improve its design.
 
 class Client {

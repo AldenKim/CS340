@@ -1,8 +1,10 @@
 
 // 1. What is the biggest design principle violation in the code below.
+
 /*Answer 1: I think the biggest design principle violation is the single responsibility principle.
 The code below gets the interval, duration, and departure variables in a single function. We can separate these
 into different functions. */
+
 // 2. Refactor the code to improve its design.
 
 type Dictionary = {
