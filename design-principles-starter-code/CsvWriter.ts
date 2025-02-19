@@ -6,8 +6,8 @@ and printing the CSV data  */
 
 // 2. Explain how you would refactor the program to improve its design.
 
-/*Answer 2: I would refactor the program by creating two separate classes, one for formatting the output, 
-and one for actually sending it out/writing to the output. */
+/*Answer 2: I would refactor the program by creating two separate classes, one for formatting the output and making it a string, 
+and one for actually sending it out/writing to the output or printing. */
 
 export class CsvWriter {
 

@@ -6,9 +6,11 @@ some of the functions should more likely be handled by the Employee class  */
 // 2. Explain how you would refactor the code to improve its design.
 
 /* I would move the functions getTotalYearsOfService and getMonthsInLastPosition into the
-employee class, the retirenment class should only be calculating retirenment and shouldn't worry about 
+employee class, the retirenment class should only be calculating retirement and shouldn't worry about 
 these other functions. This would also allow retirementCalculator to not rely on one instance of employee when calculating
-retirement. */
+retirement. We need to get rid of the fact that retirement calculator's constructor takes in an employee
+and maybe make the calculate retirement function take in a client so we can reuse one instance of retirement calculator
+over and over instead of needing to instantiate new ones.  */
 
 class Employee {
 	public employmentStartDate: Date;

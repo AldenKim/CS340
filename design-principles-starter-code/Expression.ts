@@ -1,6 +1,7 @@
 // 1. What design principles does this code violate?
 
-/* Answer 1: Violates single responsibility, simplicity, decomposition */
+/* Answer 1: Violates decomposition because we decompse the if statement 
+into function calls and even decompose into client class */
 
 // 2. Refactor the code to improve its design.
 

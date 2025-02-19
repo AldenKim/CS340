@@ -1,9 +1,10 @@
 
 // 1. What is the biggest design principle violation in the code below.
 
-/*Answer 1: I think the biggest design principle violation is the single responsibility principle.
-The code below gets the interval, duration, and departure variables in a single function. We can separate these
-into different functions. */
+/*Answer 1: I think the biggest design principle violation is Code duplication.
+The code below gets the interval, duration, and departure variables in a single function and does the same checks in 
+similr blocks of code over and over. We can move these duplicate blocks of code into functions and call a single function that
+will run through all these checks.  */
 
 // 2. Refactor the code to improve its design.
 
