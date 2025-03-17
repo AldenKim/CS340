@@ -99,6 +99,7 @@ async function run() {
   await insertFollowees();
   await getFollower();
   await updateFollower();
+  console.log();
   await getFollower();
   await deleteFollow();
 }
