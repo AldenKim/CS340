@@ -5,14 +5,16 @@ import { YardOrnamentProviderInterface } from "../holiday/YardOrnamentProviderIn
 
 export class DecorationPlacer {
   // FIXME use dependency inversion to remove these hard-coded dependencies
+  private readonly factory: DecorationFactory;
   private tableclothPattern: TableclothPatternProviderInterface;
   private wallHanging: WallHangingProviderInterface;
   private yardOrnament: YardOrnamentProviderInterface;
 
   public constructor(factory: DecorationFactory) {
-    this.tableclothPattern = factory.createTableClothPatternProvider();
-    this.wallHanging = factory.createWallHangingProvider();
-    this.yardOrnament = factory.createYardOrnamentProvider();
+    this.factory = factory;
+    this.tableclothPattern = this.factory.createTableClothPatternProvider();
+    this.wallHanging = this.factory.createWallHangingProvider();
+    this.yardOrnament = this.factory.createYardOrnamentProvider();
   }
 
   placeDecorations(): string {
