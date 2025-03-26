@@ -1,3 +1,4 @@
+import { DecorationFactory } from "../DecorationFactory";
 import { HalloweenTableclothPatternProvider } from "../holiday/Halloween/HalloweenTableclothPatternProvider";
 import { HalloweenWallHangingProvider } from "../holiday/Halloween/HalloweenWallHangingProvider";
 import { HalloweenYardOrnamentProvider } from "../holiday/Halloween/HalloweenYardOrnamentProvider";
@@ -11,14 +12,10 @@ export class DecorationPlacer {
   private wallHanging: WallHangingProviderInterface;
   private yardOrnament: YardOrnamentProviderInterface;
 
-  public constructor(
-    tableclothPattern: TableclothPatternProviderInterface,
-    wallHanging: WallHangingProviderInterface,
-    yardOrnament: YardOrnamentProviderInterface
-  ) {
-    this.tableclothPattern = tableclothPattern;
-    this.wallHanging = wallHanging;
-    this.yardOrnament = yardOrnament;
+  public constructor(factory: DecorationFactory) {
+    this.tableclothPattern = factory.createTableClothPatternProvider();
+    this.wallHanging = factory.createWallHangingProvider();
+    this.yardOrnament = factory.createYardOrnamentProvider();
   }
 
   placeDecorations(): string {
