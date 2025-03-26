@@ -112,7 +112,7 @@ async function run() {
   let object = await pageDao.getPageOfFollowees(
     "@FredFlintstone",
     10,
-    "@Followee10"
+    undefined
   );
   let items = object.values;
   let hasMorePages = object.hasMorePages;
@@ -130,7 +130,7 @@ async function run() {
   if (hasMorePages) {
     console.log("List of Followees based on a Follower Page 2");
     items = (
-      await pageDao.getPageOfFollowees("@FredFlintstone", 10, "@Followee2")
+      await pageDao.getPageOfFollowees("@FredFlintstone", 10, "@Followee19")
     ).values;
 
     items.forEach((item) => {
@@ -145,7 +145,7 @@ async function run() {
   }
 
   console.log("List of Followers based on a Followee");
-  items = (await pageDao.getPageOfFollowers("@Followee10", 10, "@Followee2"))
+  items = (await pageDao.getPageOfFollowers("@FredFlintstone", 5, undefined))
     .values;
 
   items.forEach((item) => {
