@@ -1,4 +1,4 @@
 export interface CommandInterface {
-    redo(): void;
+    do(): void;
     undo(): void;
 }

@@ -1,10 +1,18 @@
 import { IDocument } from "../document/IDocument";
 import * as readline from "readline";
 import { UserInputReader } from "./UserInputReader";
+import { UndoRedoManager } from "../UndoRedoManager";
+import { CommandInterface } from "../CommandInterface";
+import { Insert } from "../Insert";
+import { Delete } from "../Delete";
+import { Replace } from "../Replace";
+import { Open } from "../Open";
+import { Start } from "../Start";
 
 export class TextEditor {
   private _document: IDocument;
   private consoleReader: readline.Interface;
+  private undoRedoManager: UndoRedoManager;
 
   constructor(document: IDocument) {
     this._document = document;
@@ -12,6 +20,8 @@ export class TextEditor {
       input: process.stdin,
       output: process.stdout,
     });
+
+    this.undoRedoManager = new UndoRedoManager();
   }
 
   run(): void {
@@ -43,13 +53,14 @@ export class TextEditor {
           this.open();
           break;
         case 7:
-          this._document.clear();
+          const command: CommandInterface = new Start(this._document, this._document.getContents());
+          this.undoRedoManager.executeCommand(command);
           break;
         case 8:
-          console.log("Undo");
+          this.undoRedoManager.undo();
           break;
         case 9:
-          console.log("Redo");
+          this.undoRedoManager.redo();
           break;
         case 10:
           process.exit(1);
@@ -81,7 +92,9 @@ Your selection: `;
     const insertionInput = UserInputReader.getUserInput("Start index: ");
     const insertionIndex = UserInputReader.validateNumberInput(insertionInput);
     const sequenceInput = UserInputReader.getUserInput("Sequence to insert: ");
-    this._document.insert(insertionIndex, sequenceInput);
+    
+    const command: CommandInterface = new Insert(this._document, insertionIndex, sequenceInput);
+    this.undoRedoManager.executeCommand(command);
   }
 
   private delete(): void {
@@ -97,9 +110,8 @@ Your selection: `;
       deletionDistanceInput
     );
 
-    if (this._document.delete(deletionIndex, deletionDistance) == null) {
-      console.log("Deletion unsuccessful");
-    }
+    const command: CommandInterface = new Delete(this._document, deletionIndex, deletionDistance);
+    this.undoRedoManager.executeCommand(command);
   }
 
   private replace(): void {
@@ -122,8 +134,8 @@ Your selection: `;
         );
       }
 
-      this._document.delete(replaceIndex, replaceDistance);
-      this._document.insert(replaceIndex, replacementString);
+      const command: CommandInterface = new Replace(this._document, replaceIndex, replacementString, replaceDistance);
+      this.undoRedoManager.executeCommand(command);
     }
   }
 
@@ -141,6 +153,8 @@ Your selection: `;
 
   private open(): void {
     const openFileName = UserInputReader.getUserInput("Name of file to open: ");
-    this._document.open(openFileName);
+
+    const command: CommandInterface = new Open(this._document, openFileName, this._document.getContents());
+    this.undoRedoManager.executeCommand(command);
   }
 }

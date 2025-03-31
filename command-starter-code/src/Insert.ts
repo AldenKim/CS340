@@ -12,7 +12,7 @@ export class Insert implements CommandInterface {
     this.text = text;
   }
 
-  public redo(): void {
+  public do(): void {
     this.document.insert(this.index, this.text);
   }
 
