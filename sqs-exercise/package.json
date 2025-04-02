@@ -1,0 +1,25 @@
+{
+  "name": "sqs-exercise",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run clean && tsc",
+    "clean": "rimraf dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": "",
+  "devDependencies": {
+    "@types/aws-sdk": "^0.0.42",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "@aws-sdk/client-sqs": "^3.777.0",
+    "@types/node": "^22.14.0"
+  },
+  "start": "node dist/SqsClient.js"
+}
